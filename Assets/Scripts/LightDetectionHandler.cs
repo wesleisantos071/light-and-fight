@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class LightDetectionHandler : MonoBehaviour {
     GameObject player2;
-    SpriteRenderer sr;
+    public GameObject Body;
+    BoxCollider2D bc;
+    bool onShadow = true;
     void Start() {
         player2 = GameObject.FindGameObjectWithTag("Player2");
-        sr = GetComponent<SpriteRenderer>();
+        bc = GetComponent<BoxCollider2D>();
     }
-
-    public LayerMask layerMask;
 
     private void FixedUpdate() {
         Vector2 tgt = player2.transform.position - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, tgt);
+        int layerMask = ~(LayerMask.GetMask("NonLight"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, tgt, 1000, layerMask);
         if (hit) {
-            if (hit.transform.gameObject.CompareTag(player2.tag)) {
-                sr.enabled = false;
-            } else {
-                sr.enabled = true;
-            }
+            onShadow = !hit.transform.gameObject.CompareTag(player2.tag);
+            Body.SetActive(onShadow);
+            bc.enabled = onShadow;
             //Debug.DrawRay(transform.position, tgt, Color.green);
         }
     }

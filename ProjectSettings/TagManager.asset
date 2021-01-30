@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Player2
   - Player1
+  - EnemyL1
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - 
   - Characters
-  - 
-  - 
+  - Enemy
+  - NonLight
   - 
   - 
   - 
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: EnemySL
+    uniqueID: 3020734569
+    locked: 0
+  - name: EnemyEyesSL
+    uniqueID: 1711710475
     locked: 0
