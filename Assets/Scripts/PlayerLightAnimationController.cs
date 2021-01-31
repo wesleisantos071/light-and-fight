@@ -12,6 +12,7 @@ public class PlayerLightAnimationController : MonoBehaviour {
         playerMovement.onJump += OnJump;
         playerMovement.onWalk += OnWalk;
         collisionHandler.onTouchGround += OnGround;
+        collisionHandler.onTouchEnemy += OnHurt;
     }
 
     void OnJump() {
@@ -41,12 +42,13 @@ public class PlayerLightAnimationController : MonoBehaviour {
     }
 
     void OnHurt() {
-
+        anim.SetTrigger("hurt");
     }
 
     private void OnDestroy() {
         playerMovement.onJump -= OnJump;
         playerMovement.onWalk -= OnWalk;
         collisionHandler.onTouchGround -= OnGround;
+        collisionHandler.onTouchEnemy -= OnHurt;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerFightAnimationController : MonoBehaviour {
     public PlayerMovementHandler playerMovement;
     public CollisionDetectionHandler collisionHandler;
+    public PlayerAttackHandler attackHandler;
     public Animator anim;
 
     // Start is called before the first frame update
@@ -12,6 +13,8 @@ public class PlayerFightAnimationController : MonoBehaviour {
         playerMovement.onJump += OnJump;
         playerMovement.onWalk += OnWalk;
         collisionHandler.onTouchGround += OnGround;
+        attackHandler.onAttack += OnAttack;
+        collisionHandler.onTouchEnemy += OnHurt;
     }
 
     void OnJump() {
@@ -36,17 +39,34 @@ public class PlayerFightAnimationController : MonoBehaviour {
     }
 
     void OnGround() {
-        Debug.Log("OnGround called");
         anim.SetBool("jumping", false);
     }
 
-    void OnHurt() {
+    void OnAttack(int direction) {
+        bool aRight = false;
+        bool aLeft = false;
+        switch (direction) {
+            case 1:
+                aRight = true;
+                break;
+            case -1:
+                aLeft = true;
+                break;
+            default:
+                break;
+        }
+        anim.SetBool("attackRight", aRight);
+        anim.SetBool("attackLeft", aLeft);
+    }
 
+    void OnHurt() {
+        anim.SetTrigger("hurt");
     }
 
     private void OnDestroy() {
         playerMovement.onJump -= OnJump;
         playerMovement.onWalk -= OnWalk;
         collisionHandler.onTouchGround -= OnGround;
+        collisionHandler.onTouchEnemy -= OnHurt;
     }
 }

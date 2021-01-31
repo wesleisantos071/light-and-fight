@@ -5,11 +5,12 @@ using System;
 public class CollisionDetectionHandler : MonoBehaviour {
 
     public Action onTouchGround;
+    public Action onTouchEnemy;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         Debug.Log("collided with" + collision.tag);
-        if (collision.CompareTag("EnemyL1")) {
-            Debug.Log("Ouch!");
+        if (collision.CompareTag("EnemyL1") || collision.CompareTag("Boss")) {
+            onTouchEnemy?.Invoke();
         }
     }
 

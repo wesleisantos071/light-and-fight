@@ -5,6 +5,8 @@ using System;
 public class PlayerMovementHandler : MonoBehaviour {
     public float speed = 10;
     public float jumpForce = 10;
+    [HideInInspector]
+    public int lastDirection = 1;
 
     Rigidbody2D rb;
 
@@ -42,8 +44,10 @@ public class PlayerMovementHandler : MonoBehaviour {
         int horizontal = 0;
         if (Input.GetKey(left)) {
             horizontal = -1;
+            lastDirection = horizontal;
         } else if (Input.GetKey(right)) {
             horizontal = 1;
+            lastDirection = horizontal;
         }
         onWalk?.Invoke(horizontal);
         return horizontal;
