@@ -7239,6 +7239,7 @@ GameObject:
   - component: {fileID: 533802537}
   - component: {fileID: 533802532}
   - component: {fileID: 533802538}
+  - component: {fileID: 533802534}
   m_Layer: 10
   m_Name: Player1
   m_TagString: Player1
@@ -7283,6 +7284,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &533802534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533802531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bdfa668638046a8960325bd8b45e9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementHandler: {fileID: 533802536}
 --- !u!4 &533802535
 Transform:
   m_ObjectHideFlags: 0
@@ -7312,6 +7326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 17
+  lastDirection: 1
   left: 97
   right: 100
   jump: 32
@@ -7341,6 +7356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 533802536}
   collisionHandler: {fileID: 533802537}
+  attackHandler: {fileID: 533802534}
   anim: {fileID: 391625548}
 --- !u!4 &539559579 stripped
 Transform:
@@ -18176,6 +18192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 17
+  lastDirection: 1
   left: 276
   right: 275
   jump: 273
