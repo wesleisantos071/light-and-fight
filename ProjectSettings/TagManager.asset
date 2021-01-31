@@ -46,9 +46,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Rocks
+    uniqueID: 3875848817
+    locked: 0
   - name: EnemySL
     uniqueID: 3020734569
     locked: 0
   - name: EnemyEyesSL
     uniqueID: 1711710475
+    locked: 0
+  - name: Boss
+    uniqueID: 846693759
     locked: 0
