@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BossMovementController : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class BossMovementController : MonoBehaviour {
     private float timeToMove;
     bool moving = true;
     public float platformOffsetY = 1;
+    public Action onHitLight;
+    public bool drawLine = true;
 
     void Start() {
         player2 = GameObject.FindGameObjectWithTag("Player2");
@@ -40,6 +43,11 @@ public class BossMovementController : MonoBehaviour {
         bool onLight = true;
         if (hit) {
             onLight = hit.transform.gameObject.CompareTag(player2.tag);
+            if (onLight) {
+                onHitLight?.Invoke();
+            }
+        }
+        if (drawLine) {
             Debug.DrawRay(transform.position, tgt, Color.green);
         }
         return onLight;
@@ -51,7 +59,7 @@ public class BossMovementController : MonoBehaviour {
     }
 
     private void Move() {
-        GameObject go = platforms[Random.Range(0, platforms.Length)];
+        GameObject go = platforms[UnityEngine.Random.Range(0, platforms.Length)];
         Vector2 platPos = go.transform.position;
         //adjust position and move to there
         Vector2 newPos = platPos + (Vector2.up * platformOffsetY);

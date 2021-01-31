@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossSpitHandler : MonoBehaviour {
     public GameObject playerLight;
     public float speed = 1;
+    public float lifetime = 2;
 
     // Update is called once per frame
     void Update() {
@@ -12,6 +13,10 @@ public class BossSpitHandler : MonoBehaviour {
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, playerLight.transform.position, step);
             Rotate();
+        }
+        lifetime -= Time.deltaTime;
+        if (lifetime <= 0) {
+            Destroy(gameObject);
         }
     }
 

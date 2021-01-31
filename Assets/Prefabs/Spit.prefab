@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLight: {fileID: 0}
   speed: 1
+  lifetime: 5
 --- !u!61 &5681080974108842935
 BoxCollider2D:
   m_ObjectHideFlags: 0

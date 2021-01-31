@@ -8,6 +8,9 @@ public class LightDetectionHandler : MonoBehaviour {
     BoxCollider2D bc;
     bool onShadow = true;
     public bool debugLine = false;
+
+
+
     void Start() {
         player2 = GameObject.FindGameObjectWithTag("Player2");
         bc = GetComponent<BoxCollider2D>();
