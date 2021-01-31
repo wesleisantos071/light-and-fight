@@ -21,7 +21,6 @@ public class BossMovementController : MonoBehaviour {
         player2 = GameObject.FindGameObjectWithTag("Player2");
         bc = GetComponent<BoxCollider2D>();
         platforms = GameObject.FindGameObjectsWithTag("Platform");
-        Debug.Log("Found :" + platforms.Length + " platforms");
         timeToMove = initialTimeToMove;
         Move();
     }

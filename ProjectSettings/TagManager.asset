@@ -9,6 +9,7 @@ TagManager:
   - Player1
   - EnemyL1
   - Platform
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX

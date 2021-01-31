@@ -37,7 +37,6 @@ public class PlayerLightAnimationController : MonoBehaviour {
     }
 
     void OnGround() {
-        Debug.Log("OnGround called");
         anim.SetBool("jumping", false);
     }
 
