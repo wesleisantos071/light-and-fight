@@ -21,11 +21,9 @@ public class PlayerAttackHandler : MonoBehaviour {
             onAttack?.Invoke(lastDirection);
             switch (lastDirection) {
                 case 1:
-                    Debug.Log("enabling right");
                     attackAreaRight.SetActive(true);
                     break;
                 case -1:
-                    Debug.Log("enabling left");
                     attackAreaLeft.SetActive(true);
                     break;
             }
@@ -33,12 +31,10 @@ public class PlayerAttackHandler : MonoBehaviour {
     }
 
     public void DisableRightAttack() {
-        Debug.Log("disabling right");
         attackAreaRight.SetActive(false);
     }
 
     public void DisableLeftAttack() {
-        Debug.Log("disabling left");
         attackAreaLeft.SetActive(false);
     }
 }
