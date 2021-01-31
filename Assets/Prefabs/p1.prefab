@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -419118479
-  m_SortingLayer: 4
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7775142478982023316, guid: 2ee4ec18e5e1c40f3ba077b43fed02cb,
     type: 3}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_ApplyToSortingLayers: 0000000071c204e7
+  m_ApplyToSortingLayers: 0000000071c204e77f857732
   m_ShapePath:
   - {x: -0.15126914, y: -0.24062522, z: 0}
   - {x: 0.25876364, y: -0.28923127, z: 0}

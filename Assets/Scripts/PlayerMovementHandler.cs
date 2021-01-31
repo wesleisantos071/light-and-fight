@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerMovementHandler : MonoBehaviour {
     public float speed = 10;
     public float jumpForce = 10;
@@ -12,13 +12,18 @@ public class PlayerMovementHandler : MonoBehaviour {
     public KeyCode right;
     public KeyCode jump;
 
+    public Action onJump;
+    public Action<int> onWalk;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update() {
         int horizontal = ReadHorizontal();
-        MoveHorizontal(horizontal);
+        if (horizontal != 0) {
+            MoveHorizontal(horizontal);
+        }
         ReadJump();
     }
 
@@ -29,6 +34,7 @@ public class PlayerMovementHandler : MonoBehaviour {
     private void ReadJump() {
         if (Input.GetKeyDown(jump)) {
             rb.velocity = Vector2.up * jumpForce;
+            onJump?.Invoke();
         }
     }
 
@@ -39,6 +45,7 @@ public class PlayerMovementHandler : MonoBehaviour {
         } else if (Input.GetKey(right)) {
             horizontal = 1;
         }
+        onWalk?.Invoke(horizontal);
         return horizontal;
     }
 }
