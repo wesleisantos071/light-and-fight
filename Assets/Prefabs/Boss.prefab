@@ -84,6 +84,7 @@ MonoBehaviour:
   initialTimeToMove: 3
   finalTimeToMove: 1
   platformOffsetY: 0.7
+  drawLine: 1
 --- !u!95 &6471432449503651195
 Animator:
   serializedVersion: 3
@@ -235,12 +236,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650927926838284726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f29dc866c33bc499186a453b44c816e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spitPrefab: {fileID: 0}
+  spitPrefab: {fileID: 5681080974108842931, guid: 271f8ae26a33042e28298cebabd913e4,
+    type: 3}
   playerTarget: {fileID: 0}
   initialSpitTime: 2
   limitSpitTime: 0.8

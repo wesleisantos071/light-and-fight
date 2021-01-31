@@ -8,7 +8,7 @@ public class CollisionDetectionHandler : MonoBehaviour {
     public Action onTouchEnemy;
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("EnemyL1")) {
+        if (collision.CompareTag("EnemyL1") || collision.CompareTag("Spit")) {
             onTouchEnemy?.Invoke();
         }
     }

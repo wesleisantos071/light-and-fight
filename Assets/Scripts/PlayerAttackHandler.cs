@@ -6,8 +6,8 @@ using System;
 public class PlayerAttackHandler : MonoBehaviour {
     public Action<int> onAttack;
     public PlayerMovementHandler movementHandler;
-    public BoxCollider2D attackAreaLeft;
-    public BoxCollider2D attackAreaRight;
+    public GameObject attackAreaLeft;
+    public GameObject attackAreaRight;
 
     // Start is called before the first frame update
     void Start() {
@@ -19,22 +19,26 @@ public class PlayerAttackHandler : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             int lastDirection = movementHandler.lastDirection;
             onAttack?.Invoke(lastDirection);
+            switch (lastDirection) {
+                case 1:
+                    Debug.Log("enabling right");
+                    attackAreaRight.SetActive(true);
+                    break;
+                case -1:
+                    Debug.Log("enabling left");
+                    attackAreaLeft.SetActive(true);
+                    break;
+            }
         }
     }
 
-    public void EnableRightAttack() {
-        attackAreaRight.enabled = true;
-    }
-
     public void DisableRightAttack() {
-        attackAreaRight.enabled = false;
-    }
-
-    public void EnableLeftAttack() {
-        attackAreaLeft.enabled = true;
+        Debug.Log("disabling right");
+        attackAreaRight.SetActive(false);
     }
 
     public void DisableLeftAttack() {
-        attackAreaLeft.enabled = false;
+        Debug.Log("disabling left");
+        attackAreaLeft.SetActive(false);
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - EnemyL1
   - Platform
   - PlayerAttack
+  - Spit
   layers:
   - Default
   - TransparentFX
