@@ -15,7 +15,7 @@ public class PlayerEnergyHandler : MonoBehaviour {
 
     // Update is called once per frame
     void UpdateBar() {
-        bar.fillAmount -= 0.1f;
+        bar.fillAmount -= 0.01f;
         float fill = bar.fillAmount;
         if (fill <= 0) {
             Debug.Log("gameover");
