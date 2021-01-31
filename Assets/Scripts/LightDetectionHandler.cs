@@ -7,6 +7,7 @@ public class LightDetectionHandler : MonoBehaviour {
     public GameObject Body;
     BoxCollider2D bc;
     bool onShadow = true;
+    public bool debugLine = false;
     void Start() {
         player2 = GameObject.FindGameObjectWithTag("Player2");
         bc = GetComponent<BoxCollider2D>();
@@ -20,7 +21,8 @@ public class LightDetectionHandler : MonoBehaviour {
             onShadow = !hit.transform.gameObject.CompareTag(player2.tag);
             Body.SetActive(onShadow);
             bc.enabled = onShadow;
-            //Debug.DrawRay(transform.position, tgt, Color.green);
+            if (debugLine)
+                Debug.DrawRay(transform.position, tgt, Color.green);
         }
     }
 }
