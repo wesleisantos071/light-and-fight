@@ -6,8 +6,11 @@ using System;
 
 public class PlayerEnergyHandler : MonoBehaviour {
     public Image bar;
-    public GameObject gameoverImage;
     public CollisionDetectionHandler collisionHandler;
+    [SerializeField]
+    float hitReceiveAmount = 1;
+    [SerializeField]
+    GameEvent eventOnGameOver;
 
     private void Start() {
         collisionHandler.onTouchEnemy += UpdateBar;
@@ -15,11 +18,11 @@ public class PlayerEnergyHandler : MonoBehaviour {
 
     // Update is called once per frame
     void UpdateBar() {
-        bar.fillAmount -= 0.01f;
+        Debug.Log("Receiving hit");
+        bar.fillAmount -= hitReceiveAmount;
         float fill = bar.fillAmount;
         if (fill <= 0) {
-            Debug.Log("gameover");
-            gameoverImage.SetActive(true);
+            eventOnGameOver.Raise();
         }
     }
 
