@@ -13,12 +13,11 @@ public class PlayerEnergyHandler : MonoBehaviour {
     GameEvent eventOnGameOver;
 
     private void Start() {
-        collisionHandler.onTouchEnemy += UpdateBar;
+        collisionHandler.onTouchEnemy += ReceiveHit;
     }
 
     // Update is called once per frame
-    void UpdateBar() {
-        Debug.Log("Receiving hit");
+    void ReceiveHit() {
         bar.fillAmount -= hitReceiveAmount;
         float fill = bar.fillAmount;
         if (fill <= 0) {
@@ -27,6 +26,6 @@ public class PlayerEnergyHandler : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        collisionHandler.onTouchEnemy -= UpdateBar;
+        collisionHandler.onTouchEnemy -= ReceiveHit;
     }
 }

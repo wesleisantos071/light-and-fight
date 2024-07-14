@@ -16,6 +16,8 @@ public class BossMovementController : MonoBehaviour {
     public float platformOffsetY = 1;
     public Action onHitLight;
     public bool drawLine = true;
+    public float detectLightDistance = 1000;
+    Vector3 hitPosition = Vector3.zero;
 
     void Start() {
         player2 = GameObject.FindGameObjectWithTag("Player2");
@@ -36,20 +38,31 @@ public class BossMovementController : MonoBehaviour {
     }
 
     private bool IsOnLight() {
-        Vector2 tgt = player2.transform.position - transform.position;
+        Vector3 tgt = player2.transform.position - transform.position;
         int layerMask = ~(LayerMask.GetMask("NonLight"));
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, tgt, 1000, layerMask);
-        bool onLight = true;
-        if (hit) {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, tgt, detectLightDistance, layerMask);
+        bool onLight = false;
+        if (hit ) {
+            Debug.Log($"hit.transform.tag is: {hit.transform.tag}");
+            //Debug.Log($"hit.distance is: {hit.distance}");
+            hitPosition = hit.transform.position;
             onLight = hit.transform.gameObject.CompareTag(player2.tag);
             if (onLight) {
                 onHitLight?.Invoke();
             }
         }
         if (drawLine) {
-            Debug.DrawRay(transform.position, tgt, Color.green);
+            //Debug.DrawRay(transform.position, tgt, Color.green);
+            Vector3 newSpot = transform.position + (tgt * detectLightDistance);
+            Debug.DrawLine(transform.position, newSpot);
         }
         return onLight;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectLightDistance);
+        Gizmos.DrawSphere(hitPosition, .3f);
     }
 
     IEnumerator DelayedMove(float time) {
