@@ -9,25 +9,24 @@ public class PlayerAttackHandler : MonoBehaviour {
     public GameObject attackAreaLeft;
     public GameObject attackAreaRight;
 
-    // Start is called before the first frame update
-    void Start() {
+    InputHandler inputHandler;
 
+    private void Awake() {
+        inputHandler = new InputHandler();
+        inputHandler.Player.Action.performed += ctx => Attack();
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            int lastDirection = movementHandler.lastDirection;
-            onAttack?.Invoke(lastDirection);
-            switch (lastDirection) {
-                case 1:
-                    attackAreaRight.SetActive(true);
-                    break;
-                case -1:
-                    attackAreaLeft.SetActive(true);
-                    break;
-            }
-        }
+    private void OnEnable() {
+        inputHandler.Enable();
+    }
+
+    private void OnDisable() {
+        inputHandler.Disable();
+    }
+
+    void Attack() {
+        onAttack?.Invoke(1);
+        attackAreaRight.SetActive(true);
     }
 
     public void DisableRightAttack() {

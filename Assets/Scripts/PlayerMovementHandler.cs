@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices.ComTypes;
+using UnityEngine.InputSystem;
+
 public class PlayerMovementHandler : MonoBehaviour {
     public float speed = 10;
     public float jumpForce = 10;
@@ -17,6 +20,21 @@ public class PlayerMovementHandler : MonoBehaviour {
     public Action onJump;
     public Action<int> onWalk;
 
+    InputHandler inputHandler;
+
+    private void Awake() {
+        inputHandler = new InputHandler();
+        inputHandler.Player.Jump.performed += ctx => Jump();
+    }
+
+    private void OnEnable() {
+        inputHandler.Enable();
+    }
+
+    private void OnDisable() {
+        inputHandler.Disable();
+    }
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -26,7 +44,6 @@ public class PlayerMovementHandler : MonoBehaviour {
         if (horizontal != 0) {
             MoveHorizontal(horizontal);
         }
-        ReadJump();
     }
 
     private void MoveHorizontal(int direction) {
@@ -35,17 +52,21 @@ public class PlayerMovementHandler : MonoBehaviour {
 
     private void ReadJump() {
         if (Input.GetKeyDown(jump)) {
-            rb.velocity = Vector2.up * jumpForce;
-            onJump?.Invoke();
+            Jump();
         }
+    }
+
+    private void Jump() {
+        rb.velocity = Vector2.up * jumpForce;
+        onJump?.Invoke();
     }
 
     private int ReadHorizontal() {
         int horizontal = 0;
-        if (Input.GetKey(left)) {
+        if (inputHandler.Player.MoveLeft.IsPressed()) {
             horizontal = -1;
             lastDirection = horizontal;
-        } else if (Input.GetKey(right)) {
+        } else if (inputHandler.Player.MoveRight.IsPressed()) {
             horizontal = 1;
             lastDirection = horizontal;
         }
