@@ -8,69 +8,35 @@ using UnityEngine.InputSystem;
 public class PlayerMovementHandler : MonoBehaviour {
     public float speed = 10;
     public float jumpForce = 10;
-    [HideInInspector]
-    public int lastDirection = 1;
+    public int playerIndex = 0;
 
-    Rigidbody2D rb;
-
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode jump;
+    private Vector2 movementInput;
 
     public Action onJump;
     public Action<int> onWalk;
 
-    InputHandler inputHandler;
-
-    private void Awake() {
-        inputHandler = new InputHandler();
-        inputHandler.Player.Jump.performed += ctx => Jump();
-    }
-
-    private void OnEnable() {
-        inputHandler.Enable();
-    }
-
-    private void OnDisable() {
-        inputHandler.Disable();
-    }
-
+    Rigidbody2D rb;
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
-        int horizontal = ReadHorizontal();
-        if (horizontal != 0) {
-            MoveHorizontal(horizontal);
+    private void Update() {
+        int direction = 0;
+        if (movementInput.x != 0) {
+            direction = movementInput.x > 0 ? 1 : -1;
+            transform.Translate(new Vector3(movementInput.x, 0, 0) * speed * Time.deltaTime);
         }
+        onWalk?.Invoke(direction);
     }
 
-    private void MoveHorizontal(int direction) {
-        transform.position += Vector3.right * direction * speed * Time.deltaTime;
-    }
+    public void Move(Vector2 movementDirection) {
+        movementInput = movementDirection;
+     }
 
-    private void ReadJump() {
-        if (Input.GetKeyDown(jump)) {
-            Jump();
-        }
-    }
-
-    private void Jump() {
+    public void Jump() {
+        onJump?.Invoke();
         rb.velocity = Vector2.up * jumpForce;
         onJump?.Invoke();
     }
 
-    private int ReadHorizontal() {
-        int horizontal = 0;
-        if (inputHandler.Player.MoveLeft.IsPressed()) {
-            horizontal = -1;
-            lastDirection = horizontal;
-        } else if (inputHandler.Player.MoveRight.IsPressed()) {
-            horizontal = 1;
-            lastDirection = horizontal;
-        }
-        onWalk?.Invoke(horizontal);
-        return horizontal;
-    }
 }

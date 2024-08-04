@@ -43,7 +43,7 @@ public class BossMovementController : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, tgt, detectLightDistance, layerMask);
         bool onLight = false;
         if (hit ) {
-            Debug.Log($"hit.transform.tag is: {hit.transform.tag}");
+            //Debug.Log($"hit.transform.tag is: {hit.transform.tag}");
             //Debug.Log($"hit.distance is: {hit.distance}");
             hitPosition = hit.transform.position;
             onLight = hit.transform.gameObject.CompareTag(player2.tag);

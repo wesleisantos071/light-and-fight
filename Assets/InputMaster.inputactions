@@ -110,6 +110,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UniversalPlayer",
+            "id": "505441a5-dffc-403d-8a39-a88e6d4e303e",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "524498ec-af92-4c06-99cf-e0e4bc8e6fad",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "aa02bbdd-0706-4cde-bc50-5ad77b4ab6da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f2cf9cc2-2e19-40ab-95eb-1886bd9ff2c4",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Control Scheme",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7921933b-fba9-446a-83e2-a9881b5c62f1",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
